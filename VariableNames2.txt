@@ -1,0 +1,27 @@
+6.1.
+maximum -> maxOfUnseenMessages // Количество непрочитанных сообщений, которое будем просматривать.
+diff -> clientBalance // Вместо разности суммы денег и цены товара, баланс клиента.
+newValue -> lotWeightAfterSplit // Масса груза после процедуры разделения.
+filteredTrades -> oilTrades // Вместо абстрактных отфильтрованных сделок, сделки с нефтью.
+check_first -> is_first_hash_fun_zero // Проверка позиции, выдаваемой 1й хэш функцией в фильтре Блума.
+
+
+6.2.
+accountDto // data transfer object для аккаунта
+accountEntity // представление аккаунта в базе данных
+tradeBuilder // строитель объекта "Сделка", представляющего сделку по продаже/покупке товара на бирже
+linked_list // хранилище в реализации стэка, которая работает не с хвостом списка как с верхушкой стека, а с его головой. В качестве хранилища используется LinkedList, поэтому логично так же назвать и переменную.
+
+6.3.
+Контекст - проверка почтового ящика.
+username -> emailLogin
+password -> emailPassword
+protocol -> emailProtocol
+
+
+6.4. 
+props -> sessionProperties 
+inbox -> inboxFolder 
+seen -> seenFlag //флаг, маркирующий просмотренное сообщение
+store -> messageStore 
+session -> mailSession
