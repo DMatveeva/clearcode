@@ -1,0 +1,17 @@
+3.1. 
+1) 
+IncrementGeneratorFactory.createLaplaceGenerator() вместо new LaplaceGenerator()
+IncrementGeneratorFactory.createGaussianGenerator() вместо new GaussianGenerator()
+IncrementGeneratorFactory.createLogisticGenerator() вместо new LogisticGenerator()
+
+2) Trade.createWithRefinedMetals(...), Trade.createWithCrudeOil(...), Trade.createWithCoal(...) - сооздаем объект "Сделка" c нужным продуктом и соответствующими этому продукту параметрами. Вместо например new Trade(Type.REFINED_METALS, 100, 17, 10, ...).
+
+3) Создаем объект "Телефонный номер", передавая в конструктор номер в национальном либо международном формате.
+PhoneNumberFactory.usingNationalFormat("8(916)0000000")
+PhoneNumberFactory.usingInternationalFormat("+79160000000")
+
+3.2
+
+1) OrderManagementService (интерфейс) : OrderManagementServiceImpl (реализация)
+2) Customer : VipCustomer, OrdinaryCustomer // Если у нас в системе есть 2 типа клиентов с которыми надо работать по разному.
+3) IncrementGenerator : GaussianGenerator, LaplaceGenerator // IncrementGenerator - интерфейс, который представляет генератор случайных чисел с неким распределением. Его реализации - генераторы случайных чисел с нормальным распределением и распределением Лапласа.

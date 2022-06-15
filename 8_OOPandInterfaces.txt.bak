@@ -1,0 +1,15 @@
+3.1. 
+1) 
+IncrementGenerator.createLaplaceGenerator() вместо new LaplaceGenerator()
+IncrementGenerator.createGaussianGenerator() вместо new GaussianGenerator()
+IncrementGenerator.createLogisticGenerator() вместо new LogisticGenerator()
+
+2) Trade.createWithRefinedMetals(...), Trade.createWithCrudeOil(...), Trade.createWithCoal(...) - сооздаем объект "Сделка" c нужным продуктом и соответствующими этому продукту параметрами. Вместо например new Trade(Type.REFINED_METALS, 100, 17, 10, ...).
+
+3) SplitLotsAction -> withNewLot, withUpdateExistingLots
+
+3.2
+
+1) OrderManagementService (интерфейс) : OrderManagementServiceImpl (реализация)
+2) Customer : VipCustomer, OrdinaryCustomer // Если у нас в системе есть 2 типа клиентов с которыми надо работать по разному.
+3) IncrementGenerator : GaussianGenerator, LaplaceGenerator // IncrementGenerator - интерфейс, который представляет генератор случайных чисел с неким распределением. Его реализации - генераторы случайных чисел с нормальным распределением и распределением Лапласа.
