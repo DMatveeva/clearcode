@@ -1,0 +1,53 @@
+1) new GaussianGenerator(-4, 12)
+final int LOCATION = 4 // Коэффициент сдвига, равный матожиданию.
+final int SCALE = 12 // Коэффициент масштаба.
+
+2)
+formatter.setMaximumFractionDigits(15); ->
+final int NUM_DECIMAL_PLACES = 12 // Количество знаков после запятой.
+
+3) separatorSymbol.setDecimalSeparator(','); ->
+final int SEPARATOR = ', ' // 
+
+4) folders.equals("") ->
+final String PROJECT_FOLDER = ""; //
+
+5) System.out.print("\r" + i*100/getNumberOfConfig() + "%"); ->
+final int HUNDRED_PERCENT = 100;
+
+6) alpha = 0.5;
+final double DEFAULT_VOTING_THRESHOLD = 0.5 // Порог голосования по умолчанию, если в параметрах эксперимента не указано иное.
+
+7) public double tax = 0.1; ->
+final double DEFAULT_TAX = 0.1  // Налоговая ставка по умолчанию, если в параметрах эксперимента не указано иное.
+
+8) for (int j = 0; j < 25; j++) {...} ->
+final int DEFAULT_EGOISTS_NUM = 25; // Количество эгоистов в эксперименте по умолчанию.
+
+
+9)  for (int j = 0; j < 1000; j++) { env.doStep();} ->
+final int DEFAULT_ROUNDS_NUM = 1000; // Количество раундов голосования в эксперименте по умолчанию.
+
+10) 
+String[] parts = paramString.split(" ");
+BigDecimal start = new BigDecimal(parts[1]);
+BigDecimal end = new BigDecimal(parts[2]);
+BigDecimal step = new BigDecimal(parts[3]); -> 
+final int START_INDEX = 1;
+final int ENF_INDEX = 2;
+final int STEP_INDEX = 3;
+//Парсим строку с параметрами. Вынесем индексы в константы, чтобы можно было легко при необходимости изменить порядок параметров в строке.
+				
+11) double line = Double.parseDouble(parts[i].replace(",", ".")); ->
+final String DOT = ".";
+final String COMMA = ","; // Выносим в константы запятую и точку, т.к. они несколько раз встречаются в методе для парсинга файла.
+
+		
+12) if (getNumberOfParams() > 19) {...} -> 
+final int MAX_PARAM_NUM = 19; // Проверяем, что количество параметров не больше максимального(19).
+
+
+
+
+
+
