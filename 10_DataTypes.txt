@@ -1,0 +1,69 @@
+1) if (voicesFor > ((double) persons.size()) * alpha ) {...} ->
+boolean isProposalAccepted = voicesFor > ((double) persons.size()) * alpha;
+if (isProposalAccepted) {...} // Проверка, что предложение вынесенное на голосование, принято.
+
+2) Из предыдущего примера:
+voicesFor > ((double) persons.size()) * alpha -> voicesFor >=  (int) Math.ceil(persons.size() * alpha) 
+// voicesFor - int, alpha - double, persons.size() - int. Чтобы предложение считалось принятым, необходимо, чтобы голосов "за" было больше либо равно, чем произведение порога голосования на количество голосующих. Это произведение типа double, поэтому округляем  его к нижнему большему числу и используем "больше либо равно".
+
+3) if (persons.get(i).increment > 0 && (persons.get(i).vos.tax != 0)) {...} ->
+boolean isPersonIncPositive = persons.get(i).increment > 0;
+boolean isTaxpayer = persons.get(i).vos.tax != 0;
+if (isPersonIncPositive && isTaxpayer) {...} // Условие выполняется только если человек налогоплательщик и на текущем раунде голосования у него положительное приращение капитала. Выносим эти условия в отдельные переменные.
+
+4) int altruistNum = (int) (persons.size() * altruisticStrategy.num / 100.0); ->
+altruisticStrategy.num - это процент альтруистов в стратегии. Сейчас он типа int. Наверное лучшу сделать его типом double и назвать altruistPercent.
+altruistNum - это количество участников альтруистов исходя из процента заданного в стратегии.
+int altruistNum = (int) Math.ceil(persons.size() * altruisticStrategy.altruistPercent);
+
+5) 
+int egoNum = 0;
+for (i = 0; i < persons.size(); i++) { // check if person is egoist, then egoNum++ }
+double egoPercent =  egoNum / (double) persons.size() ->
+if persons.size() == 0 {
+	throw new Exception("Persons list must not be empty.")
+} // Добавляем проверку, что список участников не пуст.
+				
+6) 
+System.out.println("3.7.1."); ->
+private static String APP_VERSION = "3.2.1";
+System.out.println(APP_VERSION); //Константа вместо магического числа.
+
+7) BufferedWriter bw = ff.getBufWriter("", "egos and alts tax.csv"); ->
+final String PROJECT_FOLDER = "";
+final String TAXES_CSV_FILE = "egos and alts tax.csv";
+
+8) 
+BigDecimal start = new BigDecimal(parts[1]);
+BigDecimal end = new BigDecimal(parts[2]);
+BigDecimal step = new BigDecimal(parts[3]);
+for (BigDecimal i = start; i.compareTo(end) <= 0; i = i.add(step)){
+    newParam.add(i.doubleValue());
+} ->
+Можно сразу сделать переменные типа double, т.к. нам не нужна здесь точность.  
+double start = Double.parseDouble(parts[1]); 
+...
+
+9) altruistsCapital.add(0f); ->
+altruistsCapital.add(0d) // Меняем число с одинарной точностью на число с двойной точностью.
+
+10)  System.out.println("Capital: " + sum + "\tis sufficient? " + (Math.abs(sum) < 0.005)); ->
+double SUFFICIENT_CAPITAL = 0.0050; // Увеличиваем точность и выносим условие в отдельную переменную.
+
+11)
+
+public class Person implements Comparable{
+    private int id;
+    ...
+    public static int ids = 0;
+
+    public Person(){    {
+        id = ids;
+        ids++;
+    }
+} ->
+Меняем тип переменных id и ids на long, т.к. может быть переполнение. 
+
+12) System.out.println("Error during table print"); ->
+final String PRINT_ERROR_MSG = "Error during table print";
+System.out.println(PRINT_ERROR_MSG); // Выносим магическую строку в константу.
