@@ -1,0 +1,192 @@
+1)
+Было:
+public class Person implements Comparable{
+    private long id;
+    public double capital;
+    public static long ids = 0;
+
+    public Person() {
+        id = ids;
+        ids++;
+    }
+}
+Добавляем в конструктор инициализацию переменной capital:
+public Person() {
+    capital = 0;
+    id = ids;
+    ids++;
+}
+	
+2) Было:
+public class Group {
+    public ArrayList<Person> participants;
+    ...
+    public Group() {
+        participants = new ArrayList<>();
+    }
+}
+Инициализируем переменную participants в месте объявления, а не в конструкторе.
+public class Group {
+    public ArrayList<Person> participants = new ArrayList<Person>();
+    ... }
+
+3) Было:
+int numTests = 500;
+... //много кода
+for (int i = 0; i < numTests; i++) { ... }
+Переносим объявление numTests к месту первого использования:
+int numTests = 500;
+for (int i = 0; i < numTests; i++) { ... }
+
+4) Было:
+int numSteps = 6000; //Много кода, где numSteps используется и не модифицируется.
+Делаем numSteps final:
+final int numSteps = 6000;
+
+5) Было:
+BigDecimal start = new BigDecimal(parts[1]);
+BigDecimal end = new BigDecimal(parts[2]);
+BigDecimal step = new BigDecimal(parts[3]);
+//Много кода
+for (BigDecimal i = start; i.compareTo(end) <= 0; i = i.add(step)){...}
+Перенесем объявления переменных start, end, step к циклу.
+...
+BigDecimal step = new BigDecimal(parts[3]);
+for (BigDecimal i = start; i.compareTo(end) <= 0; i = i.add(step)){...}
+		
+6) Было:
+BufferedReader bufferedReader = new BufferedReader(reader);
+	...
+bufferedReader.close();
+Используем конструкцию try-with-resources, чтобы автоматически закрывать поток на чтение.
+try(BufferedReader bufferedReader = new BufferedReader(reader)){
+	...
+} catch(Exception exception){ ... }
+
+7) Было:
+public class VectorOfStrategies {
+    public double egoismCoeff;
+    public double groupCoeff;
+    public double altruismCoeff; 
+}
+Добавляем в класс конструктор:
+public class VectorOfStrategies {
+    ...	
+	public VectorOfStrategies(double egoismCoeff, double groupCoeff, double altruismCoeff) {
+		this.egoismCoeff = egoismCoeff;
+		this.groupCoeff = groupCoeff;
+		this.altruismCoeff = altruismCoeff;
+	}
+}
+
+8) Было: 
+public class LaplaceGenerator extends IncrementGenerator {
+		private Random rnd;
+		...
+	}
+Делаем переменную rnd - генератор случайных числе - final.
+final Random rnd;
+
+9) Было:
+double a = rnd.nextGaussian();
+//много кода для вычисления sum
+return multiplicator * a/sqrt(sum/freedomDegrees) + mean;
+Переносим инициализацию a к месту первого и единственного использования:
+double a = rnd.nextGaussian();
+return multiplicator * a/sqrt(sum/freedomDegrees) + mean;
+
+10) Было:
+	public class TestEngine {
+		...
+		Double alpha;
+		
+		public void scanParams(String paramString) {
+		...
+			if (parts[0].equalsIgnoreCase("Alpha")) {
+                alpha = parseParam(parts[1]);
+            } else {
+				alpha = 0.5;
+			}
+		}
+Вместо того, чтобы сканировать параметр из файла конфигурации, а в случае отсутствия присваивать дефолтное значение 0.5, лучше сразу проинициализировать при объявлении. 
+public class TestEngine {
+		Double alpha = 0.50;
+		
+		public void scanParams(String paramString) {
+			if (parts[0].equalsIgnoreCase("Alpha")) {
+                alpha = parseParam(parts[1]);
+            }
+		}
+11) Было:
+Класс Person, содержащий много параметров. В конструкторе инициализируются не все параметры. Вместо этого, в классе Environment существует метод createPerson(...), который инициализирует все переменные класса, и при этом c созданным объектом производятся дополнительные действия, например добавления в переменную persons класса Environment. Лучше изменить в классе Person конструктор, чтобы в нем инициализировались все поля.
+
+12) Было:
+		long time;
+        if (!isSorted) {
+            time = System.currentTimeMillis();
+            ...
+			timeSorting += System.currentTimeMillis() - time;
+        }
+        time = System.currentTimeMillis();
+        ...
+        timeGenerating += System.currentTimeMillis() - time;
+        time = System.currentTimeMillis();
+        ...
+		timeCounting += System.currentTimeMillis() - time;
+		time = System.currentTimeMillis();
+		timeVoting += System.currentTimeMillis() - time;
+Вместо того, чтобы переиспользовать везде переменную time, лучше объявить несколько переменных с более наглядными именами, например
+        if (!isSorted) {
+            long startTimeSorting = System.currentTimeMillis();
+            ...
+			timeSorting += System.currentTimeMillis() - time;
+        }
+        long startTimeGenerating = System.currentTimeMillis();
+        ...
+        timeGenerating += System.currentTimeMillis() - time;
+        long startTimeCounting = System.currentTimeMillis();
+        ...
+		timeCounting += System.currentTimeMillis() - time;
+		startTimeVoting= System.currentTimeMillis();
+		timeVoting += System.currentTimeMillis() - time;	
+
+13) Было:
+double sumIncrement = 0; //аккумулятор
+...//цикл, в котором не используется sumIncrement
+for (int i = 0; i < persons.size(); i++) {
+            sumIncrement += persons.get(i).increment;
+}
+Переносим инициализацию аккумулятора  к циклу, где он используется.
+double sumIncrement = 0; //аккумулятор
+for (int i = 0; i < persons.size(); i++) {
+            sumIncrement += persons.get(i).increment;
+}
+
+14) Было:
+int i = 0;
+while ( i < persons.size()){...}
+//много кода
+while (i < groups.size()) {...}
+Забыла обнулить счетчик. ->
+int i = 0;
+while ( i < persons.size()){...}
+i = 0;
+//много кода
+while (i < groups.size()) {...}
+
+15)Было: 
+Класс, представляющий собой генератор случайных чисел с нормальным распределением. Его конструктор:
+public GaussianGenerator(double m, double v) {
+        rnd = new Random();
+        locationParam = m;
+        scaleParam = v;
+    }
+Добавляем проверку, что параметр масштаба > 0.
+public GaussianGenerator(double m, double v) {
+        rnd = new Random();
+        locationParam = m;
+		if (v <= 0) {
+            throw new IllegalArgumentException("Scale must be positive.");
+        }
+        scaleParam = v;
+    }
