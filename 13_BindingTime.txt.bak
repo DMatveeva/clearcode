@@ -23,7 +23,7 @@ class TestEngine {
 2) 
 double sum = 0;
 for (int i = 0; i < persons.size(); i++) {
- sum += persons(i).getIncrement();
+	sum += persons(i).getIncrement();
 }
 Связывание выполняется во время написания кода, т.к. sum - это аккумулятор в цикле, поэтому сразу присваиваем эотй переменной значение 0.
 
