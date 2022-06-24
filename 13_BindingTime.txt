@@ -1,0 +1,36 @@
+1) 
+class TestEngine {
+	private IncrementGenerator incrementGenerator;
+	int numVotingRounds;
+    int numPersons;
+	
+	public LinkedList<String> readFile(String filename) {
+		while ((currentLine = br.readLine()) != null) {
+           scanParams(currentLine);
+        }
+		...
+	}
+	
+	public void scanParams(String paramString) {
+		...
+		incrementGenerator = scanIncrementGenerator(params);
+		numVotingRounds = ...;
+		numPersons = ...
+	}
+}
+Метод readFile при начальной загрузке программы считывает данные из файла, и вызывает метод scanParams, в котором инициализируются переменные incrementGenerator, numVotingRounds, numPersons на основе информации из файла. Так у нас есть возможность задавать параметры эксперимента в конфигурационном файле при запуске. 
+
+2) 
+double sum = 0;
+for (int i = 0; i < persons.size(); i++) {
+	sum += persons(i).getIncrement();
+}
+Связывание выполняется во время написания кода, т.к. sum - это аккумулятор в цикле, поэтому сразу присваиваем эотй переменной значение 0.
+
+3)
+final double DEFAULT_TAX = 0.1
+
+public double tax = DEFAULT_TAX;
+
+Связывание выполняется во время компиляции. Значение (налоговая ставка по умолчанию) выносится в константу, чтобы при изменении ставки по умолчанию не приходилось ее менять по всему коду.
+
