@@ -1,0 +1,44 @@
+1) 
+public class Environment {
+ public ArrayList<Person> persons;
+ ...
+}
+Можно работать с переменной persons с помощью циклов for-each либо через java streams api.
+
+2)
+ArrayList<String> elements; -> HashSet<String> elements;
+Список всевозможных химических элементов, которые могут встречаться в сплавах или продуктах, которые продаются или покупаются в наших сделках. Вместо списка на основе массива лучше использовать множество, так поиск элемента будет выполняться быстрее и безопаснее.
+
+3)
+ArrayList<Action> actions; -> Queue<Action> actionQueue;
+Список действий в сценарии. Например, "Создать сделку", "Провести оплату" и т.д. Поскольку они выполняются в порядке очереди, .лучше использовать для их хранения очередь.
+
+4) 
+class DescribeAction implements Action {
+ public ArrayList<Trade> trades;
+ ...
+} -> 
+public LinkedList<Trade> trades;
+Данный класс вывод параметры сделок, которые хранятся к переменной trades. Возможно, здесь лучше использовать LinkedList, т.к. нам необходимо описать сделки по порядку, и нет нужды обращаться к сделкам по индексу.
+
+5)
+String[] parts = paramString.split(" ");
+if (parts[0].charAt(0) == '{') {
+ ...
+}
+if (parts[0].equalsIgnoreCase("Participants")) {
+ Participant participant = new Participant();
+ participant.count = (int) parseParam(parts[1]);
+ ...
+}
+Здесь возможно лучше изменить структуру конфигурационного файла, и вместо массива parts использовать HashSet.
+Сейчас например, параметры для переменной participants выглядят так:
+Participants 10 0.5 0.33 
+Если сделать 
+Participants.count 10
+Participants.egoismCoeff 0.5
+Participants.altruismCoeff 0.5
+И получать значение так:
+
+HashSet<String> params = new HashSet<>(Arrays.asList(parts));
+
