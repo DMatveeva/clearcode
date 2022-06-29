@@ -25,7 +25,7 @@ public Environment getEnvironment(int numberOfConfig) {
 }
 
 4)
-//СОздаем таблицу и заполняем изменившимися параметрами.
+//СОздаем таблицу и заполняем параметрами, изменившимися с последнего запуска.
 List<String> xSigns = new ArrayList<>();
 List<String> ySigns = new ArrayList<>();
 List<String> labels = new ArrayList<>();
@@ -42,11 +42,27 @@ for (int i = 0; i < numTests; i++) {
  env.setIncgen(new GaussianGenerator(y, 12));
  ...
 }
-}
 
 6)
+// Заполняем статистику по голосованиям для участников.
+ for (Person person : env.persons) {
+  for (int k = 0; k < resultStatProfiles.size(); k++) {
+   if (resultStatProfiles.get(k).isParticipant(person)) {
+    startCaps.set(k, startCaps.get(k) + person.capital);
+	...
+   }
+ }
+}
 
 7)
+// Считаем сумму позитивных приращений и направляем их на помощь участникам с отрицательным приращением.
+double costForSupport = 0;
+double positiveCost = 0;
+Set<Integer> positiveIncsAgents = new HashSet<>();
+for (int i = 0; i < persons.size(); i++) {
+ if (persons.get(i).increment > averageInc) {
+ ...
+}
 
 3.2
 К сожалению раньше не делала комментарии в коде, т.к. из некой статьи на Хабре взяла идею, что комментарии излишни, и код должен быть самодокументрируемым. Но уйдя в отпуск по уходу за ребенком прочитала "Совершенный код" Макконнелла, где он опровергает эту идею. Теперь, прочитав эту книгу, и пройдя ваш курс, буду писать комментарии, где это уместно.
