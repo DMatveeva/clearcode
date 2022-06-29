@@ -1,0 +1,52 @@
+3.1
+
+1)
+public double generateIncrement() {
+ //Получаем случайные числа с распределением Лапласа.
+return getLaplaceDistributedValue(defMean, Math.sqrt(2) / defVariance);
+}
+
+2)
+boolean isProposalAccepted = voicesFor > ((double) persons.size()) * alpha;
+if (isProposalAccepted) {
+ // Изменяем сумму капитала участника на соответвующее приращение и удаляем банкротов.
+ while (i < persons.size()) {
+  ...
+  }
+}
+
+3)
+public Environment getEnvironment(int numberOfConfig) {
+ ...
+ // Создаем участников, добавляем в группы и альтруистическую стратегию, если нужно.
+ for (int i = 0; i < participants.size(); i++) {
+  ...
+ }
+}
+
+4)
+//СОздаем таблицу и заполняем изменившимися параметрами.
+List<String> xSigns = new ArrayList<>();
+List<String> ySigns = new ArrayList<>();
+List<String> labels = new ArrayList<>();
+for (int j = 0; j < changedParams.get(1).size(); j++) {
+ xSigns.add(...);
+}
+
+5)
+// Считаем капитализацию эгоистов и альтруистов.
+double egoistsCap = 0;
+double altruistsCap = 0;
+for (int i = 0; i < numTests; i++) {
+ Environment env = new Environment();
+ env.setIncgen(new GaussianGenerator(y, 12));
+ ...
+}
+}
+
+6)
+
+7)
+
+3.2
+К сожалению раньше не делала комментарии в коде, т.к. из некой статьи на Хабре взяла идею, что комментарии излишни, и код должен быть самодокументрируемым. Но уйдя в отпуск по уходу за ребенком прочитала "Совершенный код" Макконнелла, где он опровергает эту идею. Теперь, прочитав эту книгу, и пройдя ваш курс, буду писать комментарии, где это уместно.
