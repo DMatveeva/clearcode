@@ -1,0 +1,101 @@
+1)
+/*
+Trade tradeA = ...
+Trade tradeB = ...
+...
+*/
+ArrayList<Trade> = ...
+
+Раньше сплав можно было делать только из 2-х сделок. А затем - из любого количесвтва. Раньше старый код был закоментирован. Его надо просто удалить. 
+(11. Закомментированный код)
+
+2)
+public class Environment {
+ protected int nextStepNumber; //from zero
+} -> 
+protected int nextStepNumber = 0;
+Комментарий утверждает очевидное, можно просто явно проинициализировать переменную нулем.
+(4. Шум)
+
+3)
+public Map<Person, Integer> bankruptedPersons; /*Person and step when it was bankrupted */
+-> 
+public Map<Person, Integer> bankruptToBankruptcyStep;
+Вместо комментария лучше дать более говорящее имя.
+(12. Не используйте комментарии там, где можно использовать функцию или переменную)
+
+4)
+for (int i = 0; i < persons.size(); i++) //generate 
+{
+  persons.get(i).increment = incgen.generateIncrement();
+}
+(4. Шум)
+
+5)
+int altruists = altrstrategies.get(0).numberOfPersons;// !! Only if one strategy
+Лучше вместо невнятого комментария написать условие в коде.
+int altruists;
+if (altrstrategies.size() = 1) {
+ altruists = altrstrategies.get(0).numberOfPersons;
+} else {
+ altruists = ...
+}
+(2. Бормотание)
+
+6)
+for (int i = 0; i < althrstrategies.size(); i++) //don't use number of alth. particip.
+{
+  countIncremForStrategy(althrstrategies.get(i));
+}
+В качестве ограничителя используется количество стратегий. Непонятно, почему вообще программисту может прийти в колову использовать для этого количество участников стратегии.
+(1. Неочевидные комментарии)
+
+7)
+for (int ind : agentsWithPositiveIncs) // get nedeed for help part from agents with positive deviations 
+{
+ ...
+}
+Более адекватный комментарий: 
+//У агентов, которых приращение капитала больше среднего, забираем излишек и направляем на помощь тем, у кого приращение ниже среднего.
+(2. Бормотание)
+
+8)
+for (int i = 0; i < groups.size(); i++) //count for groups
+{
+ groups.get(i).countIncrem();
+}
+Здесь и неадекватное название функции и комментарий. Лучше назвать функцию calcIncrement(), а комментарий изменить так:
+// Для каждой группы вычисляем суммарное приращение капитала всех участников.
+(3. Недостоверные комментарии)
+
+9)
+new File(folders).mkdirs(); //  "potentially/long/pathname/without/all/dirs"
+Более адекватный комментарий:
+// Создаются все родительские директории, указанные в folders, даже если они пока не существуют.
+(2. Бормотание)
+
+10)
+//System.out.println(x + "/" + fi.get(fi.size() - 1));
+Просто убрать ставший ненужным вывод в консоль.
+(11. Закомментированный код)
+
+11)
+Collections.sort(persons); // not checked
+Непонятно, что именно не проверено. Как сортируются объекты Person? В зависимости от ответа надо это исправить и удалить комментарий.
+(1. Неочевидные комментарии)
+
+12)
+BufferedReader brFirst = new BufferedReader(new FileReader(fileOnePath));
+nextLine = brFirst.readLine(); // go to first string
+Можно просто удалить комментарий. 
+(4. Шум)
+
+13)
+//Генератор случайных чисел с логистическим распределением добавлен после генератора случайных чисел с нормальным распределением и распр. Лапласа, для того, чтобы исследовать влияние различных распределений на теорию голосования в стохастической среде.
+
+Лучш убрать этот комментарий, т.к. информация о том, в каком порядке были добавлены генераторы случайных чисел избыточна, ее можно узнать из системы контроля версий.
+(8. Слишком много информации)
+
+14)
+
+15)
