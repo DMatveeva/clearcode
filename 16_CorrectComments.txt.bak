@@ -1,0 +1,81 @@
+1. Информативные комментарии
+
+1)
+// Сохраняем сделку в базе данных.
+tradeService.saveTrade(trade);
+// Сделка активируется и отправляется на обработку в системы.
+tradeService.commitTrade(trade);
+
+2)
+public void createCompositeAssay(...) {
+ // Composite assay consists of final, initial and optionally refferential assay.
+ Assay finalAssay = ...
+ Assay initialAssay = ...
+ Assay referentialAssay = ...
+}
+ 
+
+2. Представление намерений
+
+3)
+TestCase.run(
+...
+ // Чтобы в отчете каждая строка "Describe Blend" имела собственный ключ, вызываем метод withKey, иначе у всех будет ключ "AAB".
+ new DescribeBlendAction().withTrade("A.1.2").withKey("AAB"),
+ new DescribeBlendAction().withTrade("A.1.2").withKey("AAB1"),
+ new DescribeBlendAction().withTrade("A.1.2").withKey("AAB2")
+)
+
+4)
+// Создаем лоты, т.к. это необходимо для того, чтобы создать рецепт.
+lotService.createLots(...);
+...
+receiptService.createReceipt(...);
+
+
+3. Прояснение
+
+5)
+TestCase.run(
+ new  CreateAssayAction(...), 
+ // Деактивируем созданную пробу, иначе все последующие сделки на данном сервере будут создаваться с неверными параметрами.  
+ new DisableAssayAction(...) 
+);
+
+6)
+// Сухой вес и влажный вес связаны через влажность. При неправильном расчете сервер не выдаст ошибку, однако последующие расчеты будут неверны.
+lot.setDryWeight(dryWeight);
+BigDecimal wetWeight = moisture.multiply(dryWeight);
+lot.setWetWeight(wetWeight);
+
+
+4. Предупреждения о последствиях
+
+7)
+// На сервере должна быть установлена текущая дата, иначе метод выдаст ошибку.
+receiptService().updateReceipt(receipt);
+
+8)
+// Обязательно запускать этот код на сервере с текущей датой, иначе юзер будет сломан, и придется фиксить его в БД. 
+user.addGroup(group);
+
+
+5. Усиление
+
+9)
+// Юзер обязательно должен быть из региона Asia-Pacific, чтобы проводить сделку с сырой нефтью.
+crudeOilTrade.user.groups.apac = true;
+
+10)
+// При выборе другой страны при создании сделки будет ошибка.
+trade.qualityParams.receipt.country = 'Argentina';
+
+6. Комментарии TODO
+
+11)
+// TODO Пока метод поддерживает только создание сплавов на основе сделок. Создание сплавов из дургих сплавов будет добавлено в паке "Refined metals".
+public void createBlend(ArrayList<String> trades) { ... }
+
+12)
+// TODO Пока поддерживается только разделение обычной сделки. Разделение сплава будет добавлено в паке "Refined metals".
+public void split(String tradeNum) {...}
