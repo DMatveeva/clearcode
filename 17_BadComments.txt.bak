@@ -18,7 +18,6 @@ protected int nextStepNumber = 0;
 (4. Шум)
 
 3)
-
 public Map<Person, Integer> bankruptedPersons; /*Person and step when it was bankrupted */
 -> 
 public Map<Person, Integer> bankruptToBankruptcyStep;
@@ -42,7 +41,6 @@ if (altrstrategies.size() = 1) {
  altruists = ...
 }
 (2. Бормотание)
-'
 
 6)
 for (int i = 0; i < althrstrategies.size(); i++) //don't use number of alth. particip.
@@ -57,11 +55,9 @@ for (int ind : agentsWithPositiveIncs) // get nedeed for help part from agents w
 {
  ...
 }
-
 Более адекватный комментарий: 
 //У агентов, которых приращение капитала больше среднего, забираем излишек и направляем на помощь тем, у кого приращение ниже среднего.
 (2. Бормотание)
-
 
 8)
 for (int i = 0; i < groups.size(); i++) //count for groups
@@ -88,11 +84,32 @@ Collections.sort(persons); // not checked
 Непонятно, что именно не проверено. Как сортируются объекты Person? В зависимости от ответа надо это исправить и удалить комментарий.
 (1. Неочевидные комментарии)
 
-
 12)
+BufferedReader brFirst = new BufferedReader(new FileReader(fileOnePath));
+nextLine = brFirst.readLine(); // go to first string
+Можно просто удалить комментарий. 
+(4. Шум)
 
 13)
+//Генератор случайных чисел с логистическим распределением добавлен после генератора случайных чисел с нормальным распределением и распр. Лапласа, для того, чтобы исследовать влияние различных распределений на теорию голосования в стохастической среде.
 
-14)
+Лучш убрать этот комментарий, т.к. информация о том, в каком порядке были добавлены генераторы случайных чисел избыточна, ее можно узнать из системы контроля версий.
+(8. Слишком много информации)
+
+14) 
+//Сканируем конфигурационный файл и возвращаем параметры для среды эксперимента.
+public LinkedList<String> readFile(String filename) { ... }
+Лучше просто изменить имя метода на более говорящее. Например scanConfigFile(...) 
+(7. Избыточные комментарии)
 
 15)
+for (int j = 0; j < persons.size(); j++) {
+ if (env.persons.get(j).vos.altruismCoeff == 1) {
+  capA += env.persons.get(j).capital;
+ } else {
+  capE += env.persons.get(j).capital;
+ }
+} // Считаем капитализацию альтруистов и эгоистов
+
+Вместо комментария можно дать более говорящее имя переменным, например altruistCapitalization, egoistCapitalization. 
+(6. Комментарии за закрывающей фигурной скобкой)
